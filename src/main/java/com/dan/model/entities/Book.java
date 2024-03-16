@@ -6,7 +6,7 @@ public class Book {
     private String title;
     private String author;
     private int totalCopies;
-    private static int availableCopies;
+    private int availableCopies;
 
     public Book(String title, String author, int totalCopies) {
         this.id = idManager = ++idManager;
@@ -65,6 +65,7 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", totalCopies=" + totalCopies +
+                ", availableCopies=" + availableCopies+'\''+
                 '}';
     }
 }
