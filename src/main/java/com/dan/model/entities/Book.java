@@ -9,7 +9,7 @@ public class Book {
     private static int availableCopies;
 
     public Book(String title, String author, int totalCopies) {
-        this.id = idManager = idManager++;
+        this.id = idManager = ++idManager;
         this.title = title;
         this.author = author;
         this.totalCopies = totalCopies;
@@ -56,5 +56,15 @@ public class Book {
 
     public void decrementAvailableCopies() {
         availableCopies--;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", totalCopies=" + totalCopies +
+                '}';
     }
 }

@@ -11,12 +11,11 @@ public class User {
     private int age;
 
     public User(String name, String cpf, int age) {
-        this.id = idManager = idManager++;
+        this.id = idManager = ++idManager;
         this.name = name;
         this.cpf = cpf;
         this.age = age;
     }
-
 
 
     public int getId() {
@@ -47,6 +46,13 @@ public class User {
         this.age = age;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }
