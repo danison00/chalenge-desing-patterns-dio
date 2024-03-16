@@ -31,7 +31,7 @@ public class LoanService {
         if (book.getAvailableCopies() <= 0)
             throw new NoAvailableCopiesExceptions("Não há disponível exemplares deste livro");
 
-        book.incrementAvailableCopies();
+        book.decrementAvailableCopies();
         loans.add(new Loan(book, user));
         System.out.println("Empréstimo realizado com sucesso!");
     }
