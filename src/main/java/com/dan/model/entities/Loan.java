@@ -12,7 +12,7 @@ public class Loan {
     private final LocalDateTime dateTime;
 
     public Loan(Book book, User user) {
-        this.id = idManager = idManager++;
+        this.id = idManager = ++idManager;
         this.book = book;
         this.user = user;
         this.dateTime = LocalDateTime.now();
