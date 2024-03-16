@@ -9,12 +9,14 @@ public class User {
     private String name;
     private String cpf;
     private int age;
+    private NotificationPreferences notificationPreferences;
 
-    public User(String name, String cpf, int age) {
+    public User(String name, String cpf, int age,  NotificationPreferences notificationPreferences) {
         this.id = idManager = ++idManager;
         this.name = name;
         this.cpf = cpf;
         this.age = age;
+        this.notificationPreferences = notificationPreferences;
     }
 
 
