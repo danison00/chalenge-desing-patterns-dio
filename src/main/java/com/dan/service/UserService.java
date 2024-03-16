@@ -29,6 +29,9 @@ public class UserService {
         this.users.removeIf(u -> u.getId() == id);
 
     }
+    public void list(){
+        System.out.println(this.users.toString());
+    }
 
 
 }
