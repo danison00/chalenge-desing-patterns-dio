@@ -7,7 +7,7 @@ import java.util.List;
 public class BookNotificationService {
 
 
-    public void notify(List<User> users){
+    public void notify(List<User> users) {
         users.forEach(user -> System.out.printf("notificando user: %s", user.getName()));
     }
 }
