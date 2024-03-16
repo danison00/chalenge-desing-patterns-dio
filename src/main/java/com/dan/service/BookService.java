@@ -8,9 +8,7 @@ import com.dan.model.observer.Observer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookService implements Observable<Book> {
-
-    private final List<Book> books = new ArrayList<>();
+public class BookService extends AbstractService<Book> implements Observable<Book> {
 
     private final List<Observer> observers = new ArrayList<>();
 
@@ -31,32 +29,16 @@ public class BookService implements Observable<Book> {
         return BookServiceHolder.instance;
     }
 
-    public void create(Book book) {
-        this.books.add(book);
-        System.out.println("Livro criado com sucesso!");
+
+
+    @Override
+    protected void afterCreater(Book book) {
+        System.out.printf("Livro %s adicionado a biblioteca!\n", book.getTitle());
         notifyObservers(book);
     }
 
 
-    public void deleteById(int id) throws NotFoundException {
-        findById(id);
-        this.books.removeIf(b -> b.getId() == id);
 
-    }
-
-    public Book findById(int id) throws NotFoundException {
-        for (var b : books)
-            if (b.getId() == id)
-                return b;
-
-        throw new NotFoundException("Livro não encontrado");
-    }
-
-    public void list() {
-        books.forEach((b) -> {
-            System.out.println(b.toString());
-        });
-    }
     @Override
     public void notifyObservers(Book book) {
         StringBuilder message = new StringBuilder();
