@@ -33,7 +33,7 @@ public class BookService extends AbstractService<Book> implements Observable<Boo
 
     @Override
     protected void afterCreater(Book book) {
-        System.out.printf("Livro %s adicionado a biblioteca!\n\n", book.getTitle());
+        System.out.printf("Livro %s adicionado a biblioteca!\n", book.getTitle());
         notifyObservers(book);
     }
 
