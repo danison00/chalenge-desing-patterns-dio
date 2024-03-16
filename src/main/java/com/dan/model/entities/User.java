@@ -57,7 +57,7 @@ public class User extends AbstractIdentifier {
                 ", name='" + name + '\'' +
                 ", telefone='" + phone + '\'' +
                 ", email=" + email +
-                ", notificationPreferences=" + notificationPreferences +
+                ", " + notificationPreferences.toString() +
                 '}';
     }
 
