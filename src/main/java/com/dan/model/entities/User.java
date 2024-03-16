@@ -53,10 +53,13 @@ public class User extends AbstractIdentifier {
     @Override
     public String toString() {
         return "User{" +
+                "id='" + super.getId() + '\'' +
                 ", name='" + name + '\'' +
                 ", telefone='" + phone + '\'' +
                 ", email=" + email +
                 ", notificationPreferences=" + notificationPreferences +
                 '}';
     }
+
+
 }
