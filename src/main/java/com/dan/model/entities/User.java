@@ -1,20 +1,14 @@
 package com.dan.model.entities;
 
-import com.dan.model.observer.Observer;
+public class User extends AbstractIdentifier {
 
-import java.util.Date;
-
-public class User {
-
-    private static int idManager = 0;
-    private final int id;
     private String name;
     private String phone;
     private String email;
     private NotificationPreferences notificationPreferences;
 
     public User(String name, String phone, String email,  NotificationPreferences notificationPreferences) {
-        this.id = idManager = ++idManager;
+
         this.name = name;
         this.phone= phone;
         this.email = email;
@@ -22,9 +16,7 @@ public class User {
     }
 
 
-    public int getId() {
-        return id;
-    }
+
 
     public String getName() {
         return name;
@@ -61,7 +53,6 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
                 ", name='" + name + '\'' +
                 ", telefone='" + phone + '\'' +
                 ", email=" + email +
