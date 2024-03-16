@@ -1,8 +1,6 @@
 package com.dan.model;
 
-import java.time.LocalDate;
-
-public class Livro {
+public class Book {
     private static int idManager = 0;
     private final int id;
     private String title;
@@ -10,7 +8,7 @@ public class Livro {
     private int totalCopies;
     private int availableCopies;
 
-    public Livro(String title, String author, int totalCopies, int availableCopies) {
+    public Book(String title, String author, int totalCopies, int availableCopies) {
         this.id = idManager = idManager++;
         this.title = title;
         this.author = author;
