@@ -6,10 +6,7 @@ public abstract class AbstractIdentifier {
     private static int idManager = 0;
 
     public AbstractIdentifier() {
-
         this.id = idManager = ++idManager;
-
-
     }
 
     public int getId() {
