@@ -1,4 +1,4 @@
-package com.dan.model;
+package com.dan.model.entities;
 
 import java.time.LocalDateTime;
 

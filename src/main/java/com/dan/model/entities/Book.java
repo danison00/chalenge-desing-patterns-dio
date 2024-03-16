@@ -1,4 +1,4 @@
-package com.dan.model;
+package com.dan.model.entities;
 
 public class Book {
     private static int idManager = 0;
@@ -6,14 +6,14 @@ public class Book {
     private String title;
     private String author;
     private int totalCopies;
-    private int availableCopies;
+    private static int availableCopies;
 
-    public Book(String title, String author, int totalCopies, int availableCopies) {
+    public Book(String title, String author, int totalCopies) {
         this.id = idManager = idManager++;
         this.title = title;
         this.author = author;
         this.totalCopies = totalCopies;
-        this.availableCopies = availableCopies;
+        availableCopies = totalCopies;
     }
 
 
@@ -50,11 +50,11 @@ public class Book {
         return availableCopies;
     }
 
-    public void incrementAvaliableCopies(int availableCopies) {
-        this.availableCopies++;
+    public void incrementAvailableCopies() {
+        availableCopies++;
     }
 
-    public void decrementAvaliableCopies(int availableCopies) {
-        this.availableCopies--;
+    public void decrementAvailableCopies() {
+        availableCopies--;
     }
 }
