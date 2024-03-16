@@ -39,7 +39,7 @@ public class BookService {
         throw new NotFoundException("Livro não encontrado");
     }
 
-    public void listBooks() {
+    public void list() {
         books.forEach((b) -> {
             System.out.println(b.toString());
         });
