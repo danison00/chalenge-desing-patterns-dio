@@ -9,14 +9,12 @@ public class User {
     private String name;
     private String cpf;
     private int age;
-    private Date birthDate;
 
     public User(String name, String cpf, int age, Date birthDate) {
         this.id = idManager = idManager++;
         this.name = name;
         this.cpf = cpf;
         this.age = age;
-        this.birthDate = birthDate;
     }
 
 
@@ -49,13 +47,6 @@ public class User {
         this.age = age;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
 
 
 }
