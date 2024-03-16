@@ -3,6 +3,7 @@ package com.dan.service;
 import com.dan.model.entities.User;
 import com.dan.model.exception.NotFoundException;
 import com.dan.model.observer.Observer;
+import com.dan.service.interfaces.BookNotificationStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +17,9 @@ public class UserService extends AbstractService<User> implements Observer {
     public void notify(String message) {
         var usersToNotify = super.getList().stream().filter(u -> u.getNotificationPreferences().isEnable()).toList();
 
-        bookNotificationService.notify(usersToNotify);
+        bookNotificationService.notify(usersToNotify, message);
     }
 
-    @Override
-    protected void afterCreater(User user) {
-
-    }
 
     static class UserServiceHolder {
         private static final UserService instance = new UserService();
