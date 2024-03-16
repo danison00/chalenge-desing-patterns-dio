@@ -17,7 +17,7 @@ public class UserService {
     private UserService() {
     }
 
-    private static UserService getInstance() {
+    public static UserService getInstance() {
         return UserServiceHolder.instance;
     }
 
