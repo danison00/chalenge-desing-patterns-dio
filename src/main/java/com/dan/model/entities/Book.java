@@ -1,15 +1,12 @@
 package com.dan.model.entities;
 
-public class Book {
-    private static int idManager = 0;
-    private final int id;
+public class Book extends AbstractIdentifier{
     private String title;
     private String author;
     private int totalCopies;
     private int availableCopies;
 
     public Book(String title, String author, int totalCopies) {
-        this.id = idManager = ++idManager;
         this.title = title;
         this.author = author;
         this.totalCopies = totalCopies;
@@ -18,9 +15,6 @@ public class Book {
 
 
 
-    public int getId() {
-        return id;
-    }
 
     public String getTitle() {
         return title;
@@ -61,7 +55,7 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "id=" + id +
+                "id=" + super.getId() +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", totalCopies=" + totalCopies +
