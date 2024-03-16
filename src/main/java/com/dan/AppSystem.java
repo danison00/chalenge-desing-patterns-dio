@@ -8,7 +8,7 @@ import com.dan.service.UserService;
 
 import java.util.List;
 
-public class System {
+public class AppSystem {
     BookService bookService = BookService.getInstance();
     UserService userService = UserService.getInstance();
     LoanService loanService = LoanService.getInstance(bookService, userService);
@@ -18,16 +18,27 @@ public class System {
         createUsers();
         bookService.list();
         userService.list();
+        try {
+            loanService.toLoan(1, 1);
+            bookService.list();
+            loanService.toLoan(1, 1);
+            bookService.list();
+            loanService.toLoan(1, 1);
+            bookService.list();
+//            loanService.toLoan(1, 1);
+//            loanService.toLoan(1, 1);
+        } catch (Exception e) {
 
-
+            System.out.printf("*** %s ***", e.getMessage());
+        }
     }
 
     public void createBooks() {
         List.of(
-        new Book("To Kill a Mockingbird", "Harper Lee", 2),
-        new Book("1984", "George Orwell", 3),
-        new Book("The Great Gatsby", "F. Scott Fitzgerald", 1)
-     ).forEach(b -> bookService.create(b));
+                new Book("To Kill a Mockingbird", "Harper Lee", 2),
+                new Book("1984", "George Orwell", 3),
+                new Book("The Great Gatsby", "F. Scott Fitzgerald", 1)
+        ).forEach(b -> bookService.create(b));
     }
 
     public void createUsers() {
