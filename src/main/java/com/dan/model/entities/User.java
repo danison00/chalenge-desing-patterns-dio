@@ -10,7 +10,7 @@ public class User {
     private String cpf;
     private int age;
 
-    public User(String name, String cpf, int age, Date birthDate) {
+    public User(String name, String cpf, int age) {
         this.id = idManager = idManager++;
         this.name = name;
         this.cpf = cpf;
