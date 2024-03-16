@@ -1,14 +1,14 @@
 package com.dan.service;
 
-import com.dan.model.Book;
-import com.dan.model.User;
+import com.dan.model.entities.Book;
+import com.dan.model.exception.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BookService {
 
-    List<Book> books = new ArrayList<>();
+    private final List<Book> books = new ArrayList<>();
 
     static class BookServiceHolder {
         private static final BookService instance = new BookService();
@@ -26,13 +26,22 @@ public class BookService {
         System.out.println("Livro criado com sucesso!");
     }
 
-    public void deleteById(int id) {
+    public void deleteById(int id)  throws NotFoundException {
+        findById(id);
         this.books.removeIf(b -> b.getId() == id);
 
     }
+    public Book findById(int id) throws NotFoundException {
+        for (var b: books)
+            if(b.getId() == id)
+                return b;
+
+        throw new NotFoundException("Livro não encontrado");
+    }
 
     public void listBooks() {
-        System.out.println(this.books.toString());
-
+        books.forEach((b) -> {
+            System.out.println(b.toString());
+        });
     }
 }
