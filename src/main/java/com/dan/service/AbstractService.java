@@ -16,7 +16,7 @@ public abstract class AbstractService<T extends AbstractIdentifier> {
         afterCreater(t);
     }
 
-    protected abstract void afterCreater(T t);
+    protected void afterCreater(T t){};
 
 
     public void deleteById(int id) throws NotFoundException {
@@ -37,6 +37,8 @@ public abstract class AbstractService<T extends AbstractIdentifier> {
         list.forEach((o) -> {
             System.out.println(o.toString());
         });
+
+        System.out.println();
     }
 
     public List<T> getList() {
