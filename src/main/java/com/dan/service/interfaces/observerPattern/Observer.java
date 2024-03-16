@@ -1,4 +1,4 @@
-package com.dan.model.observer;
+package com.dan.service.interfaces.observerPattern;
 
 public interface Observer {
 

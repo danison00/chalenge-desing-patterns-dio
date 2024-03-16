@@ -1,13 +1,7 @@
 package com.dan.service;
 
 import com.dan.model.entities.User;
-import com.dan.model.exception.NotFoundException;
-import com.dan.model.observer.Observer;
-import com.dan.service.interfaces.BookNotificationStrategy;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
+import com.dan.service.interfaces.observerPattern.Observer;
 
 public class UserService extends AbstractService<User> implements Observer {
 

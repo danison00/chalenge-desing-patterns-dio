@@ -1,6 +1,4 @@
-package com.dan.model.observer;
-
-import com.dan.model.entities.Book;
+package com.dan.service.interfaces.observerPattern;
 
 public interface Observable<T> {
 

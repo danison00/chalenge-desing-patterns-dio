@@ -1,9 +1,8 @@
 package com.dan.service;
 
 import com.dan.model.entities.Book;
-import com.dan.model.exception.NotFoundException;
-import com.dan.model.observer.Observable;
-import com.dan.model.observer.Observer;
+import com.dan.service.interfaces.observerPattern.Observable;
+import com.dan.service.interfaces.observerPattern.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
