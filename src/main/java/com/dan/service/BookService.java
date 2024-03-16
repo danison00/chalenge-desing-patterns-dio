@@ -18,7 +18,7 @@ public class BookService extends AbstractService<Book> implements Observable<Boo
     }
 
 
-    static class BookServiceHolder {
+    private static class BookServiceHolder {
         private static final BookService instance = new BookService();
     }
 
@@ -33,7 +33,7 @@ public class BookService extends AbstractService<Book> implements Observable<Boo
 
     @Override
     protected void afterCreater(Book book) {
-        System.out.printf("Livro %s adicionado a biblioteca!\n", book.getTitle());
+        System.out.printf("Livro %s adicionado a biblioteca!\n\n", book.getTitle());
         notifyObservers(book);
     }
 
@@ -42,8 +42,7 @@ public class BookService extends AbstractService<Book> implements Observable<Boo
     @Override
     public void notifyObservers(Book book) {
         StringBuilder message = new StringBuilder();
-        message.append("Novo livro disponível em nossa biblioteca!\n")
-                .append("Título: ").append(book.getTitle());
+        message.append("O livro ").append(book.getTitle()).append(" já esta disponível em nossa biblioteca.");
 
         this.observers.forEach(o -> {
             o.notify(message.toString());
