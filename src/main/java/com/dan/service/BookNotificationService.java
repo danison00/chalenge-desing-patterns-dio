@@ -1,13 +1,14 @@
 package com.dan.service;
 
+import com.dan.model.annotations.Singleton;
 import com.dan.model.entities.User;
 import com.dan.service.interfaces.BookNotificationStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Singleton
 public class BookNotificationService {
-
 
     public void notify(List<User> users, String message) {
 

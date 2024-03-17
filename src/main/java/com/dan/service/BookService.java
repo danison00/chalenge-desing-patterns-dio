@@ -1,5 +1,7 @@
 package com.dan.service;
 
+import com.dan.model.annotations.Inject;
+import com.dan.model.annotations.Singleton;
 import com.dan.model.entities.Book;
 import com.dan.service.interfaces.observerPattern.Observable;
 import com.dan.service.interfaces.observerPattern.Observer;
@@ -7,6 +9,7 @@ import com.dan.service.interfaces.observerPattern.Observer;
 import java.util.ArrayList;
 import java.util.List;
 
+@Singleton
 public class BookService extends AbstractService<Book> implements Observable<Book> {
 
     private final List<Observer> observers = new ArrayList<>();
@@ -15,19 +18,6 @@ public class BookService extends AbstractService<Book> implements Observable<Boo
     public void subscribe(Observer observer) {
         this.observers.add(observer);
     }
-
-
-    private static class BookServiceHolder {
-        private static final BookService instance = new BookService();
-    }
-
-    private BookService() {
-    }
-
-    public static BookService getInstance() {
-        return BookServiceHolder.instance;
-    }
-
 
 
     @Override

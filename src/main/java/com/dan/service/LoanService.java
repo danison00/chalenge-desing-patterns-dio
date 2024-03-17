@@ -1,28 +1,24 @@
 package com.dan.service;
 
+import com.dan.model.annotations.Inject;
+import com.dan.model.annotations.Singleton;
 import com.dan.model.entities.Loan;
 import com.dan.model.exception.NoAvailableCopiesExceptions;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Singleton
 public class LoanService {
-    private static LoanService instance;
-
     private final List<Loan> loans = new ArrayList<>();
-    private final BookService bookService;
-    private final UserService userService;
 
-    private LoanService(BookService bookService, UserService userService) {
-        this.bookService = bookService;
-        this.userService = userService;
-    }
+    @Inject
+    private  BookService bookService;
+    @Inject
+    private  UserService userService;
 
-    public static LoanService getInstance(BookService bookService, UserService userService) {
-        if (instance == null)
-            instance = new LoanService(bookService, userService);
-        return instance;
-    }
+
+
 
     public void toLoan(int bookId, int userId) throws RuntimeException {
         var book = bookService.findById(bookId);
