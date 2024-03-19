@@ -6,7 +6,7 @@ import com.dan.model.exception.NotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractService<T extends AbstractIdentifier> {
+public abstract class AbstractServiceImpl<T extends AbstractIdentifier> {
 
     private final List<T> list = new ArrayList<>();
 

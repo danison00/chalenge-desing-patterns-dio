@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Singleton
-public class BookServiceImpl extends AbstractService<Book> implements Observable<Book> {
+public class BookServiceImpl extends AbstractServiceImpl<Book> implements Observable<Book> {
 
     private final List<Observer> observers = new ArrayList<>();
 

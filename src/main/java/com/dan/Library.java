@@ -8,7 +8,6 @@ import com.dan.model.entities.User;
 import com.dan.service.implementations.BookServiceImpl;
 import com.dan.service.implementations.LoanServiceImpl;
 import com.dan.service.implementations.UserServiceImpl;
-import com.dan.service.interfaces.UserService;
 
 import java.util.List;
 

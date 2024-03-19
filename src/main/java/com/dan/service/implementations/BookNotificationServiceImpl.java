@@ -2,12 +2,14 @@ package com.dan.service.implementations;
 
 import com.dan.model.annotations.Singleton;
 import com.dan.model.entities.User;
+import com.dan.service.interfaces.BookNotificationService;
 
 import java.util.List;
 
 @Singleton
-public class BookNotificationServiceImpl {
+public class BookNotificationServiceImpl implements BookNotificationService {
 
+    @Override
     public void notify(List<User> users, String message) {
 
         System.out.println("\n **** Notificando Usuários ****");
