@@ -5,30 +5,34 @@ import com.dan.model.annotations.Singleton;
 import com.dan.model.entities.Book;
 import com.dan.model.entities.NotificationPreferences;
 import com.dan.model.entities.User;
-import com.dan.service.BookService;
-import com.dan.service.LoanService;
-import com.dan.service.UserService;
+import com.dan.service.implementations.BookServiceImpl;
+import com.dan.service.implementations.LoanServiceImpl;
+import com.dan.service.implementations.UserServiceImpl;
+import com.dan.service.interfaces.UserService;
 
 import java.util.List;
 
 @Singleton
 public class Library {
-    @Inject
-    BookService bookService;
-    @Inject
-    UserService userService;
-    @Inject
-    LoanService loanService;
+   private BookServiceImpl bookServiceImpl;
+   @Inject
+   private UserServiceImpl userService;
+   private LoanServiceImpl loanServiceImpl;
 
+    public Library(BookServiceImpl bookServiceImpl, LoanServiceImpl loanServiceImpl) {
+        this.bookServiceImpl = bookServiceImpl;
+        this.loanServiceImpl = loanServiceImpl;
+
+    }
 
     public void run() {
         createUsers();
         createBooks();
-        bookService.list();
+        bookServiceImpl.list();
         userService.list();
         try {
-           loanService.toLoan(6, 1);
-            loanService.list();
+           loanServiceImpl.toLoan(6, 1);
+            loanServiceImpl.list();
 
         } catch (Exception e) {
 
@@ -44,7 +48,7 @@ public class Library {
                 new Book("To Kill a Mockingbird", "Harper Lee", 2),
                 new Book("1984", "George Orwell", 3),
                 new Book("The Great Gatsby", "F. Scott Fitzgerald", 1)
-        ).forEach(b -> bookService.create(b));
+        ).forEach(b -> bookServiceImpl.create(b));
     }
 
     public void createUsers() {

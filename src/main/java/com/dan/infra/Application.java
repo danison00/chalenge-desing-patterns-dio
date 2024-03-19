@@ -8,11 +8,11 @@ public class Application {
 
 
         InjectManager.injectSingleton(clazz);
-        try {
+
             var obj = SingletonManager.getInstace(clazz);
+        try {
             obj.getClass().getMethod("run").invoke(obj);
-        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
-                 IllegalAccessException e) {
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
 

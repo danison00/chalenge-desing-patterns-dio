@@ -2,11 +2,10 @@ package com.dan.infra;
 
 
 import com.dan.model.annotations.Inject;
+import com.dan.service.implementations.UserServiceImpl;
+import com.dan.service.interfaces.UserService;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Parameter;
+import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -18,7 +17,7 @@ public class InjectManager {
         System.out.println("-=-=-=-=-=-= Realizando injecões =-=-=-=-=-=-");
 
         injectByConstructor(clazz.getDeclaredConstructors(), clazz);
-        injectByField(clazz.getDeclaredFields(), getInstanceForSingletonManager(clazz));
+        injectByField(clazz.getDeclaredFields(), SingletonManager.getInstace(clazz));
 
         System.out.println("-=-=-=-=-=-= Injecões finalizadas ==-=-=-=-=-");
     }
@@ -31,18 +30,12 @@ public class InjectManager {
         Parameter[] initargs = constructor.getParameters();
         for (Parameter parameter : initargs) {
 
-            injectByConstructor(parameter.getType().getDeclaredConstructors(), parameter.getType());
+            if (!SingletonManager.contains(parameter.getType())) {
+                injectByConstructor(parameter.getType().getDeclaredConstructors(), parameter.getType());
+            }
+            instanceArgs.add(SingletonManager.getInstace(parameter.getType()));
         }
-
-        if (!SingletonManager.contains(clazz)) {
-            for (Parameter initarg : initargs)
-                instanceArgs.add(getInstanceForSingletonManager(initarg.getType()));
-
-            var instance = getInstanceForSingletonManager(clazz, instanceArgs.toArray());
-
-
-            injectByField(instance.getClass().getDeclaredFields(), instance);
-        }
+        SingletonManager.getInstace(clazz, instanceArgs.toArray());
     }
 
     private static Constructor<?> getConstructorIdeal(Constructor<?>[] constructors) {
@@ -52,46 +45,37 @@ public class InjectManager {
 
     private static <T> void injectByField(Field[] fields, T obj) {
 
-        for (Field field : fields)
+        for (Field field : fields) {
+            if (!field.isAnnotationPresent(Inject.class))
+                continue;
 
-            if (field.isAnnotationPresent(Inject.class)) {
-                field.setAccessible(true);
+            field.setAccessible(true);
+            if (!SingletonManager.contains(field.getType()))
                 injectByConstructor(field.getType().getDeclaredConstructors(), field.getType());
-                injectByField(field.getType().getDeclaredFields(), getInstanceForSingletonManager(field.getType()));
+            injectByField(field.getType().getDeclaredFields(), SingletonManager.getInstace(field.getType()));
 
-                Object value;
-                try {
-                    field.setAccessible(true);
-                    value = field.get(obj);
-                } catch (IllegalArgumentException | IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                }
-                if (value == null)
-                    inject(field, obj);
-            }
+            if (getField(field, obj) == null)
+                inject(field, obj);
+        }
     }
 
 
     private static <T> void inject(Field field, T obj) {
-
+        System.out.println("Injetando por atributo a instância" + SingletonManager.getInstace(field.getType()) + " em " + field.getType() + " na instância " + obj.getClass().getName() + " (InjectManager.java:67)");
         try {
-            System.out.println("Injetando por atributo a instância" + getInstanceForSingletonManager(field.getType()) + " em " + field.getType() + " na instância " + obj.getClass().getName() + " (InjectManager.java:67)");
-
-            field.set(obj, getInstanceForSingletonManager(field.getType()));
+            field.set(obj, SingletonManager.getInstace(field.getType()));
         } catch (IllegalAccessException e) {
-
             throw new RuntimeException(e);
         }
 
     }
 
-
-    private static <T> T getInstanceForSingletonManager(Class<?> clazz, Object... initargs) {
+    private static <T> Object getField(Field f, T obj) {
         try {
-            return SingletonManager.getInstace(clazz, initargs);
-        } catch (InvocationTargetException | IllegalAccessException | InstantiationException e) {
-
-            throw new RuntimeException(e.getMessage());
+            return f.get(obj);
+        } catch (IllegalArgumentException | IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
     }
+
 }

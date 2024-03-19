@@ -1,14 +1,12 @@
-package com.dan.service;
+package com.dan.service.implementations;
 
 import com.dan.model.annotations.Singleton;
 import com.dan.model.entities.User;
-import com.dan.service.interfaces.BookNotificationStrategy;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Singleton
-public class BookNotificationService {
+public class BookNotificationServiceImpl {
 
     public void notify(List<User> users, String message) {
 
@@ -20,10 +18,10 @@ public class BookNotificationService {
             m.append(u.getName()).append("! ").append(message);
 
             if(u.getNotificationPreferences().isEmailEnable())
-                BookNotificationByEmailService.getInstance().notify(u.getEmail(), m.toString());
+                BookNotificationByEmailServiceImpl.getInstance().notify(u.getEmail(), m.toString());
 
             if (u.getNotificationPreferences().isSmsEnable())
-                BookNotificationBySmsService.getInstance().notify(u.getPhone(), m.toString());
+                BookNotificationBySmsServiceImpl.getInstance().notify(u.getPhone(), m.toString());
         });
 
         System.out.println();

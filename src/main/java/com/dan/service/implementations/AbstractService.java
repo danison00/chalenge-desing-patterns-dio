@@ -1,4 +1,4 @@
-package com.dan.service;
+package com.dan.service.implementations;
 
 import com.dan.model.entities.AbstractIdentifier;
 import com.dan.model.exception.NotFoundException;
