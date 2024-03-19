@@ -2,25 +2,24 @@ package com.dan.infra;
 
 
 import com.dan.model.annotations.Inject;
-import com.dan.service.implementations.UserServiceImpl;
-import com.dan.service.interfaces.UserService;
 
 import java.lang.reflect.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class InjectManager {
-    public static void injectSingleton(Class<?> clazz) {
+    public static void start(Set<Class<?>> clazzes) {
 
         System.out.println("-=-=-=-=-=-= Realizando injecões =-=-=-=-=-=-");
-
-        injectByConstructor(clazz.getDeclaredConstructors(), clazz);
-        injectByField(clazz.getDeclaredFields(), SingletonManager.getInstace(clazz));
+        for (Class<?> clazz : clazzes) {
+            if (!SingletonManager.contains(clazz)) {
+                injectByConstructor(clazz.getDeclaredConstructors(), clazz);
+                injectByField(clazz.getDeclaredFields(), SingletonManager.getInstace(clazz));
+            }
+        }
 
         System.out.println("-=-=-=-=-=-= Injecões finalizadas ==-=-=-=-=-");
     }
+
 
     private static <T> void injectByConstructor(Constructor<?>[] constructors, Class<?> clazz) {
 
