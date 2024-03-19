@@ -1,12 +1,12 @@
 package com.dan;
 
-import com.dan.model.infra.InjectManager;
+import com.dan.infra.Application;
+import com.dan.infra.InjectManager;
 
 public class Main {
     public static void main(String[] args) {
 
-        AppSystem app = new AppSystem();
-        InjectManager.injectSingleton(app);
-        app.run();
+        Application.run(Library.class);
+
     }
 }

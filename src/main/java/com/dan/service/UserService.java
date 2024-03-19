@@ -11,11 +11,10 @@ public class UserService extends AbstractService<User> implements Observer {
     @Inject
     private  BookNotificationService bookNotificationService;
 
-    @Inject
     BookService bookService;
 
-    private UserService(){
-//       bookService.subscribe(this);
+    private UserService( BookService bookService){
+       bookService.subscribe(this);
     }
 
     @Override

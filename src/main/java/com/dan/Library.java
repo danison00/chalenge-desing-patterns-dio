@@ -12,7 +12,7 @@ import com.dan.service.UserService;
 import java.util.List;
 
 @Singleton
-public class AppSystem {
+public class Library {
     @Inject
     BookService bookService;
     @Inject
@@ -28,7 +28,6 @@ public class AppSystem {
         userService.list();
         try {
            loanService.toLoan(6, 1);
-
             loanService.list();
 
         } catch (Exception e) {
