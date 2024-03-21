@@ -7,7 +7,7 @@ import com.dan.service.implementations.UserServiceImpl;
 
 public interface LoanService {
 
-    void toLoan(int bookId, int userId) throws RuntimeException;
+    void toLoan(int bookId, int userId);
 
     public void list();
 

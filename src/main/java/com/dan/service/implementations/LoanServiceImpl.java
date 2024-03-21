@@ -1,33 +1,44 @@
 package com.dan.service.implementations;
 
-import com.dan.model.annotations.Inject;
-import com.dan.model.annotations.Singleton;
+
 import com.dan.model.entities.Loan;
 import com.dan.model.exception.NoAvailableCopiesExceptions;
+import com.dan.service.interfaces.BookService;
 import com.dan.service.interfaces.LoanService;
+import com.dan.service.interfaces.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Singleton
 public class LoanServiceImpl implements LoanService {
     private final List<Loan> loans = new ArrayList<>();
 
-    @Inject
-    private BookServiceImpl bookServiceImpl;
-    private UserServiceImpl userServiceImpl;
 
-    public LoanServiceImpl( UserServiceImpl userServiceImpl) {
-        this.userServiceImpl = userServiceImpl;
+    private static BookService bookService;
+    private static UserService userService;
+
+    private static LoanServiceImpl instance;
+
+    public static LoanServiceImpl getInstance() {
+        if (instance == null)
+            instance = new LoanServiceImpl();
+        return instance;
+    }
+
+    private LoanServiceImpl() {
+        userService = UserServiceImpl.getInstance();
+        bookService = BookServiceImpl.getInstance();
     }
 
     @Override
-    public void toLoan(int bookId, int userId) throws RuntimeException {
-        var book = bookServiceImpl.findById(bookId);
-        var user = userServiceImpl.findById(userId);
+    public void toLoan(int bookId, int userId) {
+        var book = bookService.findById(bookId);
+        var user = userService.findById(userId);
 
-        if (book.getAvailableCopies() <= 0)
-            throw new NoAvailableCopiesExceptions("Não há disponível exemplares deste livro");
+        if (book.getAvailableCopies() <= 0) {
+            System.out.println("Não há disponível exemplares deste livro");
+            return;
+        }
 
         book.decrementAvailableCopies();
         loans.add(new Loan(book, user));

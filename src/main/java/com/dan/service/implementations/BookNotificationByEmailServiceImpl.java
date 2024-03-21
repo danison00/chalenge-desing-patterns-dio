@@ -4,6 +4,9 @@ import com.dan.service.interfaces.BookNotificationStrategy;
 
 public class BookNotificationByEmailServiceImpl implements BookNotificationStrategy {
 
+
+
+
     private static class BookNotificationByEmailServiceHolder {
         private static final BookNotificationByEmailServiceImpl instance = new BookNotificationByEmailServiceImpl();
     }

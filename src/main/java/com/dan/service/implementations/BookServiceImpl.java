@@ -1,15 +1,22 @@
 package com.dan.service.implementations;
 
-import com.dan.model.annotations.Singleton;
 import com.dan.model.entities.Book;
-import com.dan.service.interfaces.observerPattern.Observable;
+import com.dan.service.interfaces.BookService;
 import com.dan.service.interfaces.observerPattern.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Singleton
-public class BookServiceImpl extends AbstractServiceImpl<Book> implements Observable<Book> {
+public class BookServiceImpl extends AbstractServiceImpl<Book> implements BookService {
+    private static final BookServiceImpl instance = new BookServiceImpl();
+
+    private BookServiceImpl() {
+    }
+
+    public static BookServiceImpl getInstance() {
+        return instance;
+    }
+
 
     private final List<Observer> observers = new ArrayList<>();
 
@@ -20,7 +27,7 @@ public class BookServiceImpl extends AbstractServiceImpl<Book> implements Observ
 
 
     @Override
-    protected void afterCreater(Book book) {
+    public void afterCreater(Book book) {
         System.out.printf("Livro %s adicionado a biblioteca!\n", book.getTitle());
         notifyObservers(book);
     }
